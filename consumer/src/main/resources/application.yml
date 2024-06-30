@@ -11,9 +11,7 @@ spring:
 #        spring.json.trusted.packages: '*'
 #  data:
 #    mongodb:
-#      database: Wikimediastreamsdb
-#      host: localhost
-#      port: 27017
+#      uri: mongodb+srv://danielllupercio
 
 #server:
 #  port: 9292
