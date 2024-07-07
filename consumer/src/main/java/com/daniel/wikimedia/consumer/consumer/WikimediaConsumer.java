@@ -17,11 +17,15 @@ public class WikimediaConsumer {
     private WikiMediaCrudRepository wikiMediaCrudRepository;
     ObjectMapper mapper = new ObjectMapper();
 
+    public WikimediaConsumer(WikiMediaCrudRepository wikiMediaCrudRepository){
+        this.wikiMediaCrudRepository=wikiMediaCrudRepository;
+    }
+
     @KafkaListener(topics = "WikiMedia-Stream", groupId = "DansGroup")
-    public void consumerMsg(String msg){
+    public Mono<WikimediaObject> consumerMsg(String msg){
         log.info(format("Consuming the message from daniel Topic:: %s", msg));
         // serialize the String message into a WikimediaObject?
-        WikimediaObject wikimediaObject;
+        WikimediaObject wikimediaObject = new WikimediaObject();
         try{
             wikimediaObject = mapper.readValue(msg, WikimediaObject.class);
             log.info("This is the wikimedia object: " + wikimediaObject.toString());
@@ -30,10 +34,11 @@ public class WikimediaConsumer {
             log.error("Error in processing JSON message", e);
         }
         // use reactive crud repository to save the object to mongodb  collection
+        return saveWikiMediaObject(wikimediaObject);
     }
 
     public Mono<WikimediaObject> saveWikiMediaObject(WikimediaObject wikimediaObject){
-        return wikiMediaCrudRepository.save(wikimediaObject);
+        return (Mono<WikimediaObject>) wikiMediaCrudRepository.save(wikimediaObject);
     }
 
 }
