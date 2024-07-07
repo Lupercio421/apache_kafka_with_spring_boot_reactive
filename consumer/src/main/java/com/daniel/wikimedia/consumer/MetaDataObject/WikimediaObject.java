@@ -15,7 +15,7 @@ public class WikimediaObject{
     @JsonProperty("meta")
     public Meta meta;
     @JsonProperty("id")
-    public int id;
+    public long id;
     @JsonProperty("type")
     public String type;
     @JsonProperty("namespace")
@@ -34,6 +34,14 @@ public class WikimediaObject{
     public boolean bot;
     @JsonProperty("notify_url")
     public String notify_url;
+    @JsonProperty("minor")
+    public boolean minor;
+    @JsonProperty("patrolled")
+    public boolean patrolled;
+    @JsonProperty("length")
+    public WikimediaLength length;
+    @JsonProperty("revision")
+    public WikimediaRevision revision;
     @JsonProperty("server_url")
     public String server_url;
     @JsonProperty("server_name")
