@@ -14,7 +14,7 @@ import static java.lang.String.format;
 @Service
 @Slf4j
 public class WikimediaConsumer {
-    private WikiMediaCrudRepository wikiMediaCrudRepository;
+    private final WikiMediaCrudRepository wikiMediaCrudRepository;
     ObjectMapper mapper = new ObjectMapper();
 
     public WikimediaConsumer(WikiMediaCrudRepository wikiMediaCrudRepository){
@@ -38,7 +38,7 @@ public class WikimediaConsumer {
     }
 
     public Mono<WikimediaObject> saveWikiMediaObject(WikimediaObject wikimediaObject){
-        return (Mono<WikimediaObject>) wikiMediaCrudRepository.save(wikimediaObject);
+        return wikiMediaCrudRepository.save(wikimediaObject);
     }
 
 }
