@@ -52,6 +52,16 @@ public class WikimediaObject{
     public String wiki;
     @JsonProperty("parsedcomment")
     public String parsedcomment;
+    @JsonProperty("log_id")
+    public Long logId;
+    @JsonProperty("log_type")
+    public String logType;
+    @JsonProperty("log_action")
+    public String logAction;
+    @JsonProperty("log_action_comment")
+    public String logActionComment;
+    @JsonProperty("log_params")
+    public LogParams logParams;
 }
 
 
