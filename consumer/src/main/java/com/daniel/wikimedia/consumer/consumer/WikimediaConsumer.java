@@ -4,6 +4,7 @@ import com.daniel.wikimedia.consumer.MetaDataObject.WikimediaObject;
 import com.daniel.wikimedia.consumer.repository.WikiMediaCrudRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -41,4 +42,15 @@ public class WikimediaConsumer {
         return wikiMediaCrudRepository.save(wikimediaObject);
     }
 
+    @PreDestroy
+    public void evaluateShutdown() throws InterruptedException {
+        for (int i = 0; i <= 9; i++){
+            log.info("WikiMedia Consumer Application evaluateShutdown method, " + "clean-up");
+            performCleanup();
+        }
+    }
+
+    private void performCleanup() throws InterruptedException {
+        Thread.sleep(1000);
+    }
 }
