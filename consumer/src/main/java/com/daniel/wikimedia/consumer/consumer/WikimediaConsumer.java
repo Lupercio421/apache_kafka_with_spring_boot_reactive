@@ -1,6 +1,6 @@
 package com.daniel.wikimedia.consumer.consumer;
 
-import com.daniel.wikimedia.consumer.MetaDataObject.WikimediaObject;
+import com.daniel.wikimedia.consumer.metadataobject.WikimediaObject;
 import com.daniel.wikimedia.consumer.repository.WikiMediaCrudRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

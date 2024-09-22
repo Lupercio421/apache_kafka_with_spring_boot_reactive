@@ -1,4 +1,4 @@
-package com.daniel.wikimedia.consumer.MetaDataObject;
+package com.daniel.wikimedia.consumer.metadataobject;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -17,7 +17,7 @@ public class WikimediaObject{
     @JsonProperty("title")
     public String title;
     @JsonProperty("title_url")
-    public String title_url;
+    public String titleUrl;
     @JsonProperty("comment")
     public String comment;
     @JsonProperty("timestamp")
@@ -27,7 +27,7 @@ public class WikimediaObject{
     @JsonProperty("bot")
     public boolean bot;
     @JsonProperty("notify_url")
-    public String notify_url;
+    public String notifyUrl;
     @JsonProperty("minor")
     public boolean minor;
     @JsonProperty("patrolled")
@@ -37,15 +37,15 @@ public class WikimediaObject{
     @JsonProperty("revision")
     public WikimediaRevision revision;
     @JsonProperty("server_url")
-    public String server_url;
+    public String serverUrl;
     @JsonProperty("server_name")
-    public String server_name;
+    public String serverName;
     @JsonProperty("server_script_path")
-    public String server_script_path;
+    public String serverScriptPath;
     @JsonProperty("wiki")
     public String wiki;
     @JsonProperty("parsedcomment")
-    public String parsedcomment;
+    public String parsedComment;
     @JsonProperty("log_id")
     public Long logId;
     @JsonProperty("log_type")

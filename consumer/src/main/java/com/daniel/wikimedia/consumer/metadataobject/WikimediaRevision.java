@@ -1,4 +1,4 @@
-package com.daniel.wikimedia.consumer.MetaDataObject;
+package com.daniel.wikimedia.consumer.metadataobject;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
