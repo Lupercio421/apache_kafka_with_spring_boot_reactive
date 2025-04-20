@@ -17,12 +17,13 @@ import static java.lang.String.format;
 public class WikimediaConsumer {
     private final WikiMediaCrudRepository wikiMediaCrudRepository;
     ObjectMapper mapper = new ObjectMapper();
+    String topicName = "wikimedia-stream";
 
     public WikimediaConsumer(WikiMediaCrudRepository wikiMediaCrudRepository){
         this.wikiMediaCrudRepository=wikiMediaCrudRepository;
     }
 
-    @KafkaListener(topics = "WikiMedia-Stream", groupId = "DansGroup")
+    @KafkaListener(topics = "wikimedia-stream", groupId = "DansGroup")
     public Mono<WikimediaObject> consumerMsg(String msg){
         log.info(format("Consuming the message from daniel Topic:: %s", msg));
         // serialize the String message into a WikimediaObject?
@@ -51,6 +52,6 @@ public class WikimediaConsumer {
     }
 
     private void performCleanup() throws InterruptedException {
-        Thread.sleep(1000);
+        Thread.sleep(200);
     }
 }
