@@ -9,3 +9,9 @@ spring:
 #      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
 #      properties:
 #        spring.json.trusted.packages: '*'
+#  data:
+#    mongodb:
+#      uri: mongodb+srv://danielllupercio
+
+#server:
+#  port: 9292

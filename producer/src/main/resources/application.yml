@@ -2,8 +2,12 @@ spring:
   kafka:
     producer:
       bootstrap-servers: localhost:9092
+      topic-name: wikimedia-stream
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 #      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+project:
+  base-url: https://stream.wikimedia.org/v2
+  uri: /stream/recentchange
 server:
   port: 8081

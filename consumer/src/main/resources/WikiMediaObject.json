@@ -1,0 +1,29 @@
+{
+  "$schema": "/mediawiki/recentchange/1.0.0",
+  "meta": {
+    "uri": "https://en.wikipedia.org/wiki/Category:WikiProject_banners_without_banner_shells",
+    "request_id": "cbfc907a-a883-406e-9147-2cf788547542",
+    "id": "a9758377-78b7-445c-853b-a6c88e4b6620",
+    "dt": "2024-06-11T01:08:11Z",
+    "domain": "en.wikipedia.org",
+    "stream": "mediawiki.recentchange",
+    "topic": "eqiad.mediawiki.recentchange",
+    "partition": 0,
+    "offset": 5163737619
+  },
+  "id": 1785099056,
+  "type": "categorize",
+  "namespace": 14,
+  "title": "Category:WikiProject banners without banner shells",
+  "title_url": "https://en.wikipedia.org/wiki/Category:WikiProject_banners_without_banner_shells",
+  "comment": "[[:Category talk:Biota of Vanuatu]] removed from category, [[Special:WhatLinksHere/Category talk:Biota of Vanuatu|this page is included within other pages]]",
+  "timestamp": 1718068091,
+  "user": "Cewbot",
+  "bot": true,
+  "notify_url": "https://en.wikipedia.org/w/index.php?diff=1228398327&oldid=392268603",
+  "server_url": "https://en.wikipedia.org",
+  "server_name": "en.wikipedia.org",
+  "server_script_path": "/w",
+  "wiki": "enwiki",
+  "parsedcomment": "<a href=\"/wiki/Category_talk:Biota_of_Vanuatu\" title=\"Category talk:Biota of Vanuatu\">Category talk:Biota of Vanuatu</a> removed from category, <a href=\"/wiki/Special:WhatLinksHere/Category_talk:Biota_of_Vanuatu\" title=\"Special:WhatLinksHere/Category talk:Biota of Vanuatu\">this page is included within other pages</a>"
+}
