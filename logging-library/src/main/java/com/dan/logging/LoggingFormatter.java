@@ -26,7 +26,6 @@ public class LoggingFormatter {
      * service name, source, log event name, and message, each as a key-value pair
      * separated by commas. Use this format to ensure consistent log structure across
      * Wikimedia services. Keys with {} placeholders are intended to be replaced by the developer.
-     *
      * - "LoggingVersion":"1.0","Environment":"test-environment","SpringActiveProfile":"default","WikimediaService":"{}","Source":"{}","LogEventName":"{}","Message":"{}"
      * </p>
      */
