@@ -14,7 +14,7 @@ import static com.daniel.wikimedia.consumer.logging.CommandConstants.WIKIMEDIA_C
 public class WikimediaTopicConfig {
     @Bean
     public NewTopic wikiMediaStreamTopic(){
-        log.info(LoggingFormatter.KV_WIKIMEDIA_LOGGING_FORMAT_V1, WIKIMEDIA_CONSUMER_SERVICE_NAME, "WikimediaTopicConfig", "wikiMediaStreamTopicBuilder", "Creating Kafka Topic for Wikimedia Stream");
+        log.info(LoggingFormatter.WIKIMEDIA_LOGGING_FORMAT_V1, WIKIMEDIA_CONSUMER_SERVICE_NAME, "WikimediaTopicConfig", "wikiMediaStreamTopicBuilder", "Creating Kafka Topic for Wikimedia Stream");
         return TopicBuilder
                 .name("WikiMedia-Stream")
                 .build();
