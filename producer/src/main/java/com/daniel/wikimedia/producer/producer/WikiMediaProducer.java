@@ -1,5 +1,6 @@
 package com.daniel.wikimedia.producer.producer;
 
+import com.dan.logging.LoggingFormatter;
 import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
-import static java.lang.String.format;
+import static com.daniel.wikimedia.producer.logging.CommandConstants.WIKIMEDIA_PRODUCER_SERVICE_NAME;
 
 @Service
 @RequiredArgsConstructor
@@ -19,14 +20,15 @@ public class WikiMediaProducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     public void sendMessage(String msg){
-        log.info(format("Sending message to WikiMedia-Stream Topic:: %s", msg));
+        log.info(LoggingFormatter.WIKIMEDIA_LOGGING_FORMAT_V1 + LoggingFormatter.DEFAULT_COMMA_APPENDER + LoggingFormatter.KV_KAFKA_MESSAGE,
+        WIKIMEDIA_PRODUCER_SERVICE_NAME, "WikiMediaProducer", "sendMessage", "Sending message to Kafka Topic", msg);
         kafkaTemplate.send(wikiMediaStreamTopic, msg);
     }
 
     @PreDestroy
     public void evaluateShutdown() throws InterruptedException {
         for (int i = 0; i <= 9; i++){
-            log.info("WikiMedia Producer Application evaluateShutdown method, " + "clean-up");
+            log.info(LoggingFormatter.WIKIMEDIA_LOGGING_FORMAT_V1, WIKIMEDIA_PRODUCER_SERVICE_NAME, "WikiMediaProducer", "evaluateShutdown", "Shutting down WikiMedia Producer Application");
             performCleanup();
         }
     }
