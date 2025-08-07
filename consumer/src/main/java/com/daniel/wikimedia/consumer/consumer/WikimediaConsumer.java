@@ -33,7 +33,7 @@ public class WikimediaConsumer {
         // serialize the String message into a WikimediaObject?
         WikimediaObject wikimediaObject = new WikimediaObject();
         try{
-            wikimediaObject = mapper.readValue(msg, WikimediaObject.class);;
+            wikimediaObject = mapper.readValue(msg, WikimediaObject.class);
             log.info(WIKIMEDIA_LOGGING_FORMAT_V1 + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_OBJECT, WIKIMEDIA_CONSUMER_SERVICE_NAME, WIKIMEDIA_CONSUMER_SOURCE, WIKIMEDIA_CONSUMER_LOG_EVENT_NAME, "WikimediaObject created from message", wikimediaObject.toString());
         }
         catch (JsonProcessingException e){
