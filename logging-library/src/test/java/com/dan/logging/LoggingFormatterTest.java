@@ -1,7 +1,6 @@
 package com.dan.logging;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +23,6 @@ class LoggingFormatterTest {
 
     @Test
     void assertLoggingFormat() {
-        System.out.println(LoggingFormatter.KV_WIKIMEDIA_LOGGING_FORMAT_V1);
+        System.out.println(LoggingFormatter.WIKIMEDIA_LOGGING_FORMAT_V1);
     }
 }

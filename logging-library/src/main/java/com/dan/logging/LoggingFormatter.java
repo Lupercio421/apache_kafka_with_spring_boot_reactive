@@ -3,7 +3,7 @@ package com.dan.logging;
 import static com.dan.logging.CommandConstants.SPRING_ACTIVE_PROFILE_CONSTANT;
 import static com.dan.logging.CommandConstants.WIKIMEDIA_INFRASTRUCTURE_ENVIRONMENT_CONSTANT;
 
-public class LoggingFormatter {
+public abstract class LoggingFormatter {
 
     private LoggingFormatter(){
         throw new IllegalStateException("Utility class. Not meant to be instantiated.");
@@ -16,6 +16,12 @@ public class LoggingFormatter {
     public static final String KV_WIKIMEDIA_MESSAGE_VALUE = "\"Message\":\"{}\"";
     public static final String KV_WIKIMEDIA_SOURCE = "\"Source\":\"{}\"";
     public static final String KV_WIKIMEDIA_LOG_EVENT_NAME = "\"LogEventName\":\"{}\"";
+    public static final String KV_KAFKA_MESSAGE = "\"KafkaMessage\":\"{}\"";
+    public static final String KV_KAFKA_TOPIC = "\"KafkaTopic\":\"{}\"";
+    public static final String KV_KAFKA_PARTITION = "\"KafkaPartition\":\"{}\"";
+    public static final String KV_KAFKA_OFFSET = "\"KafkaOffset\":\"{}\"";
+    public static final String KV_WIKIMEDIA_OBJECT = "\"WikimediaObject\":\"{}\"";
+    public static final String KV_ERROR = "\"Error\":\"{}\"";
     public static final String DEFAULT_COMMA_APPENDER = ",";
     public static final String DOUBLE_COLON_APPENDER = " :: ";
 
@@ -26,10 +32,33 @@ public class LoggingFormatter {
      * service name, source, log event name, and message, each as a key-value pair
      * separated by commas. Use this format to ensure consistent log structure across
      * Wikimedia services. Keys with {} placeholders are intended to be replaced by the developer.
-     * - "LoggingVersion":"1.0","Environment":"test-environment","SpringActiveProfile":"default","WikimediaService":"{}","Source":"{}","LogEventName":"{}","Message":"{}"
+     <pre>"LoggingVersion":"1.0","Environment":"test-environment","SpringActiveProfile":"default","WikimediaService":"{}","Source":"{}","LogEventName":"{}","Message":"{}" </pre>
      * </p>
      */
-    public static final String KV_WIKIMEDIA_LOGGING_FORMAT_V1 = KV_WIKIMEDIA_LOGGING_VERSION + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_LOGGING_ENVIRONMENT + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_ACTIVE_PROFILE + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_SERVICE_NAME + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_SOURCE + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_LOG_EVENT_NAME + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_MESSAGE_VALUE ;
+    public static final String WIKIMEDIA_LOGGING_FORMAT_V1 = KV_WIKIMEDIA_LOGGING_VERSION + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_LOGGING_ENVIRONMENT + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_ACTIVE_PROFILE + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_SERVICE_NAME + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_SOURCE + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_LOG_EVENT_NAME + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_MESSAGE_VALUE ;
+
+    /**
+     * Defines the logging format version 1 for Wikimedia logs with Kafka message details.
+     * <p>
+     * This format extends the basic logging format by including Kafka-specific details
+     * such as the message, topic, partition, and offset. Use this format when logging
+     * events related to Kafka messages to provide additional context for debugging and
+     * monitoring.
+     * </p>
+     */
+    public static final String WIKIMEDIA_LOGGING_FORMAT_V1_WITH_KAFKA = WIKIMEDIA_LOGGING_FORMAT_V1 + DEFAULT_COMMA_APPENDER + KV_KAFKA_MESSAGE + DEFAULT_COMMA_APPENDER + KV_KAFKA_TOPIC + DEFAULT_COMMA_APPENDER + KV_KAFKA_PARTITION + DEFAULT_COMMA_APPENDER + KV_KAFKA_OFFSET;
+
+    /**
+     * Defines the error logging format version 1 for Wikimedia logs.
+     * <p>
+     * This format includes the logging version, environment, Spring active profile,
+     * service name, source, log event name, message, and error. Each as a key-value pair
+     * separated by commas. Use this format to ensure consistent log structure across
+     * Wikimedia services. Keys with {} placeholders are intended to be replaced by the developer.
+     <pre>"LoggingVersion":"1.0","Environment":"test-environment","SpringActiveProfile":"default","WikimediaService":"{}","Source":"{}","LogEventName":"{}","Message":"{}","Error":"{}"</pre>
+     * </p>
+     */
+    public static final String WIKIMEDIA_LOGGING_FORMAT_V1_WITH_ERROR = WIKIMEDIA_LOGGING_FORMAT_V1 + DEFAULT_COMMA_APPENDER + KV_ERROR;
 
     //write a method that returns the machines Spring Active Profile
     public static String getSpringActiveProfile() {
