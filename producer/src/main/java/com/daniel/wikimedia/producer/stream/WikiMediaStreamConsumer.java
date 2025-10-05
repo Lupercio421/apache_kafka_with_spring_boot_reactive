@@ -32,6 +32,12 @@ public class WikiMediaStreamConsumer {
                 .uri(uri)
                 .retrieve()
                 .bodyToFlux(String.class)
-                .subscribe(wikiMediaProducer::sendMessage);
+                .flatMap(msg -> wikiMediaProducer.sendMessage(msg)
+                    .doOnError(error -> log.error("Error in processing message: {}", error.getMessage()))
+                )
+                .subscribe(
+                    unused -> {},
+                    error -> log.error("Stream subscription error: {}", error.getMessage())
+                );
     }
 }

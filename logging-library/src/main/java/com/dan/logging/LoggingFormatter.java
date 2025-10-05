@@ -24,6 +24,7 @@ public abstract class LoggingFormatter {
     public static final String KV_ERROR = "\"Error\":\"{}\"";
     public static final String DEFAULT_COMMA_APPENDER = ",";
     public static final String DOUBLE_COLON_APPENDER = " :: ";
+    public static final String KV_MONGODB_MESSAGE = "\"MongoDBMessage\":\"{}\"";
 
     /**
      * Defines the logging format version 1 for Wikimedia logs.
