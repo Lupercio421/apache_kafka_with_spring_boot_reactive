@@ -76,7 +76,7 @@ mvn clean compile -DskipTests
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://danielllupercio:ReactiveKafka1025@wikimedia-cluster.g7k5q91.mongodb.net/?retryWrites=true&w=majority&appName=wikimedia-cluster
+      uri: ...  # ❌ Hardcoded credentials
       database: wikimedia-cluster
 
 # AFTER
