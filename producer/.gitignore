@@ -36,3 +36,6 @@ build/
 docs/
 /.env
 /.github
+
+### AVRO ###
+src/main/java/com/daniel/wikimedia/producer/avro/com/daniel/wikimedia/producer/avro
