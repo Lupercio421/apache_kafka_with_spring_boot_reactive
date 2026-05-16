@@ -6,6 +6,10 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 #      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+  data:
+    mongodb:
+      uri: ${mongo_db_uri}
+      database: ${mongo_db_database}
 project:
   base-url: https://stream.wikimedia.org/v2
   uri: /stream/recentchange
