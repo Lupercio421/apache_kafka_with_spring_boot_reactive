@@ -15,12 +15,20 @@
 	<description>Demo Reactive Kafka project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
+		<spring-kafka.version>3.3.15</spring-kafka.version>
+		<spring-kafka-test.version>3.3.15</spring-kafka-test.version>
+		<kafka-clients.version>3.8.1</kafka-clients.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
-            <version>4.0.3</version>
+            <version>${spring-kafka.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-clients</artifactId>
+			<version>${kafka-clients.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -49,7 +57,14 @@
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka-test</artifactId>
+			<version>${spring-kafka-test.version}</version>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.kafka</groupId>
+					<artifactId>kafka-clients</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -81,5 +96,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
