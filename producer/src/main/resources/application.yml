@@ -1,17 +1,23 @@
+logging:
+  level:
+    root: INFO
+    org:
+      springframework: INFO
+      apache:
+        kafka: INFO
+    kafka:
+      authorizer:
+        logger: INFO
 spring:
-  kafka:
-    producer:
-      bootstrap-servers: localhost:9092
-      topic-name: wikimedia-stream
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-  data:
-    mongodb:
-      uri: ${mongo_db_uri}
-      database: ${mongo_db_database}
-project:
-  base-url: https://stream.wikimedia.org/v2
-  uri: /stream/recentchange
-server:
-  port: 8081
+  main:
+    web-application-type: none
+    properties:
+      spring:
+        json:
+          use:
+            type:
+              headers: false
+  cache:
+    duration: 200
+#server:
+#  port: 9292

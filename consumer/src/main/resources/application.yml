@@ -1,17 +1,23 @@
+logging:
+  level:
+    root: INFO
+    org:
+      springframework: INFO
+      apache:
+        kafka: INFO
+    kafka:
+      authorizer:
+        logger: INFO
 spring:
-  kafka:
-    consumer:
-      bootstrap-servers: localhost:9092
-      group-id: myGroup
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-#      properties:
-#        spring.json.trusted.packages: '*'
-#  data:
-#    mongodb:
-#      uri: mongodb+srv://danielllupercio
-
+  main:
+    web-application-type: none
+    properties:
+      spring:
+        json:
+          use:
+            type:
+              headers: false
+  cache:
+    duration: 200
 #server:
 #  port: 9292
