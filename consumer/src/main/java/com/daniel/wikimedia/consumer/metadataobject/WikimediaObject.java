@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class WikimediaObject{
-    @JsonProperty("$schema")
+    @JsonProperty("schema")
     public String $schema;
     @JsonProperty("meta")
     public Meta meta;

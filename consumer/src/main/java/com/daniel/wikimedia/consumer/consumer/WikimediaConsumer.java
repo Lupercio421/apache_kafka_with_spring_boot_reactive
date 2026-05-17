@@ -36,7 +36,7 @@ public class WikimediaConsumer {
             wikimediaObject = mapper.readValue(msg, WikimediaObject.class);
             log.info(WIKIMEDIA_LOGGING_FORMAT_V1 + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_OBJECT, WIKIMEDIA_CONSUMER_SERVICE_NAME, WIKIMEDIA_CONSUMER_SOURCE, WIKIMEDIA_CONSUMER_LOG_EVENT_NAME, "WikimediaObject created from message", wikimediaObject.toString());
         }
-        catch (JsonProcessingException e){
+        catch (JsonProcessingException | RuntimeException e){
             String concatenatedErrorMessage = LoggingFormatter.getThrowableMessage(e, "Error processing JSON message");
             log.error(WIKIMEDIA_LOGGING_FORMAT_V1_WITH_ERROR + DEFAULT_COMMA_APPENDER + KV_KAFKA_MESSAGE, WIKIMEDIA_CONSUMER_SERVICE_NAME, WIKIMEDIA_CONSUMER_SOURCE, "consumeMsg", "Error processing JSON message", concatenatedErrorMessage, msg);
             return Mono.error(new RuntimeException(format("Error processing JSON message: %s", concatenatedErrorMessage)));
@@ -45,9 +45,17 @@ public class WikimediaConsumer {
         return saveWikiMediaObject(wikimediaObject);
     }
 
-    public Mono<WikimediaObject> saveWikiMediaObject(WikimediaObject wikimediaObject){
+    public Mono<WikimediaObject> saveWikiMediaObject(WikimediaObject wikimediaObject) {
         log.info(WIKIMEDIA_LOGGING_FORMAT_V1 + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_OBJECT, WIKIMEDIA_CONSUMER_SERVICE_NAME, WIKIMEDIA_CONSUMER_SOURCE, "saveWikiMediaObject", "Saving WikimediaObject to MongoDB", wikimediaObject.toString());
-        return wikiMediaCrudRepository.save(wikimediaObject);
+        return wikiMediaCrudRepository.save(wikimediaObject)
+                .doOnSuccess(savedObject -> {
+                    log.info(WIKIMEDIA_LOGGING_FORMAT_V1 + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_OBJECT, WIKIMEDIA_CONSUMER_SERVICE_NAME, WIKIMEDIA_CONSUMER_SOURCE, "saveWikiMediaObject" + ".doOnSuccess", "WikimediaObject saved to MongoDB", savedObject.toString());
+                }).doOnError(err -> {
+                    log.error(WIKIMEDIA_LOGGING_FORMAT_V1_WITH_ERROR + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_OBJECT, WIKIMEDIA_CONSUMER_SERVICE_NAME, WIKIMEDIA_CONSUMER_SOURCE, "saveWikiMediaObject" + ".doOnError", "Error saving WikimediaObject to MongoDB", LoggingFormatter.getThrowableMessage(err, "MongoDB save error"), wikimediaObject.toString());
+                }).onErrorResume(err -> {
+                    log.error(WIKIMEDIA_LOGGING_FORMAT_V1_WITH_ERROR + DEFAULT_COMMA_APPENDER + KV_WIKIMEDIA_OBJECT, WIKIMEDIA_CONSUMER_SERVICE_NAME, WIKIMEDIA_CONSUMER_SOURCE, "saveWikiMediaObject" + ".onErrorResume", "Error saving WikimediaObject to MongoDB", LoggingFormatter.getThrowableMessage(err, "MongoDB save error - onErrorResume"), wikimediaObject.toString());
+                    return Mono.error(new RuntimeException("Error saving WikimediaObject to MongoDB"));
+                });
     }
 
     @PreDestroy
